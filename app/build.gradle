@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.ax.detectionv2"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -fopenmp"//c++,多线程 需要添加need to add
+                abiFilters "armeabi-v7a" // 手机的硬件架构，基本所有的硬件都适配
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    aaptOptions {
+        noCompress "tflite"
+    }
+    sourceSets {
+        main {
+//        jni.srcDirs = ['src/main/jni', 'src/main/cpp/', 'src/main/jniLibs/']
+            jniLibs.srcDirs = ["src/main/jniLibs"]
+            jni.srcDirs = ['src/cpp']
+     }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    //Tensorflow Lite
+    implementation 'org.tensorflow:tensorflow-lite:1.14.0'
+    //Tensorflow PB android
+    implementation 'org.tensorflow:tensorflow-android:1.13.1'
+    // need to add增加图片类 bumptech，build自动红线消失
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

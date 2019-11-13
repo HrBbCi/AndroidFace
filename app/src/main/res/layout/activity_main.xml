@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnTfliteCam"
+                android:text="Tflite Cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnTflitePick"
+                android:text="Tflite Pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnNCNNCam"
+                android:text="NCNN Cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnNcnnPick"
+                android:text="Ncnn Pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow android:visibility="gone">
+            <Button
+                android:id="@+id/btnPB"
+                android:text="PB Cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnPBPick"
+                android:text="PB Pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow android:visibility="gone">
+            <Button
+                android:id="@+id/btnPaddllLite"
+                android:text="Paddlite Cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnPaddllLitePick"
+                android:text="Paddlite Pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+
+
+</LinearLayout>
