@@ -11,7 +11,6 @@
         android:layout_height="match_parent">
         <TableRow>
             <Button
-                android:visibility="gone"
                 android:id="@+id/btnTfliteCam"
                 android:text="Tflite Cam"
                 android:layout_width="wrap_content"
@@ -24,7 +23,6 @@
         </TableRow>
         <TableRow>
             <Button
-                android:visibility="gone"
                 android:id="@+id/btnNCNNCam"
                 android:text="NCNN Cam"
                 android:layout_width="wrap_content"
@@ -35,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>
-        <TableRow android:visibility="gone">
+        <TableRow >
             <Button
                 android:id="@+id/btnPB"
                 android:text="PB Cam"

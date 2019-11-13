@@ -52,6 +52,7 @@ public class NcnnPiclActivity extends AppCompatActivity {
     private MobileNetssd mobileNetssd = new MobileNetssd(); //Khởi tạo giao diện //
     // java Sau đây sử dụng trực tiếp chức năng java để gọi hàm NDK c + +
     Button btn_select;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,51 +167,51 @@ public class NcnnPiclActivity extends AppCompatActivity {
             long start = System.currentTimeMillis();
             // get predict result
             float[] result = mobileNetssd.Detect(input_bmp);
-            // time end
-            long end = System.currentTimeMillis();
-            Log.d(TAG, "origin predict result:" + Arrays.toString(result));
-            long time = end - start;
-            Log.d("result length", "length of result: " + String.valueOf(result.length));
-            // show predict result and time
-            // float[] r = get_max_result(result);
+
+            if(result != null){
+                // time end
+                long end = System.currentTimeMillis();
+                Log.d(TAG, "origin predict result:" + Arrays.toString(result));
+                long time = end - start;
+                Log.d("result length", "length of result: " + String.valueOf(result.length));
+                // show predict result and time
+                // float[] r = get_max_result(result);
 
 //            String show_text = "result：" + Arrays.toString(result) + "\nname：" + resultLabel.get((int) result[0]) + "\nprobability：" + result[1] + "\ntime：" + time + "ms";
 
 
-            // Cấu hình
-            Canvas canvas = new Canvas(rgba);
-            //Vẽ một hình chữ nhật trên hình ảnh
-            Paint paint = new Paint();
-            paint.setColor(Color.RED);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(5);
-            int count = 0;
-
-            float get_finalresult[][] = TwoArry(result);
-            int object_num = 0;
-            int num = result.length / 6;// number of object
-            //continue to draw rect
-            for (object_num = 0; object_num < num; object_num++) {
-                // 画框
+                // Cấu hình
+                Canvas canvas = new Canvas(rgba);
+                //Vẽ một hình chữ nhật trên hình ảnh
+                Paint paint = new Paint();
                 paint.setColor(Color.RED);
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(5);
-                Log.d("CONV",resultLabel.get((int) result[object_num]));
-                if(resultLabel.get((int) get_finalresult[object_num][0]).equals("person")){
-                    canvas.drawRect(get_finalresult[object_num][2] * rgba.getWidth(), get_finalresult[object_num][3] * rgba.getHeight(),
-                            get_finalresult[object_num][4] * rgba.getWidth(), get_finalresult[object_num][5] * rgba.getHeight(), paint);
-                    canvas.drawText(resultLabel.get((int) get_finalresult[object_num][0]) +
-                                    "\n" + get_finalresult[object_num][1],
-                        get_finalresult[object_num][2] * rgba.getWidth(), get_finalresult[object_num][3] * rgba.getHeight(), paint);
-                    count ++;
+                int count = 0;
+
+                float get_finalresult[][] = TwoArry(result);
+                int object_num = 0;
+                int num = result.length / 6;// number of object
+                //continue to draw rect
+                for (object_num = 0; object_num < num; object_num++) {
+                    paint.setColor(Color.RED);
+                    paint.setStyle(Paint.Style.STROKE);
+                    paint.setStrokeWidth(5);
+                    Log.d("CONV", resultLabel.get((int) result[object_num]));
+                    if (resultLabel.get((int) get_finalresult[object_num][0]).equals("person")) {
+                        canvas.drawRect(get_finalresult[object_num][2] * rgba.getWidth(), get_finalresult[object_num][3] * rgba.getHeight(),
+                                get_finalresult[object_num][4] * rgba.getWidth(), get_finalresult[object_num][5] * rgba.getHeight(), paint);
+                        canvas.drawText(resultLabel.get((int) get_finalresult[object_num][0]) +
+                                        "\n" + get_finalresult[object_num][1],
+                                get_finalresult[object_num][2] * rgba.getWidth(), get_finalresult[object_num][3] * rgba.getHeight(), paint);
+                        count++;
+                    }
+
                 }
-
+                String show_text = "result：" + count + "\ntime：" + time + "ms";
+                result_text.setText(show_text);
+                show_image.setImageBitmap(rgba);
             }
-            String show_text = "result："  + count  + "\ntime：" + time + "ms";
-            result_text.setText(show_text);
-            show_image.setImageBitmap(rgba);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

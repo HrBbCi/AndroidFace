@@ -33,6 +33,13 @@ public interface Classifier {
             this.location = location;
             time = System.currentTimeMillis();
         }
+        public Recognition(
+                int id, String title, float confidence, RectF location) {
+            this.id = id;
+            this.title = title;
+            this.confidence = confidence;
+            this.location = location;
+        }
         public Recognition() {
             id = 0;
             title = "";
